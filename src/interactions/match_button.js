@@ -1,12 +1,16 @@
 const axios = require('axios')
 const { EmbedBuilder } = require('discord.js')
 
-let playerKda = { kills: [], deaths: [], assists: [] }
-let playerWards = { controlWardsPlaced: [], wardsPlaced: [], visionScore: [], pinksBought: [] }
-let playerChampion = { champLevel: [], championName: [], summonerName: []}
 
 
 async function match_button(interaction) {
+
+    let playerKda = { kills: [], deaths: [], assists: [] }
+    let playerWards = { controlWardsPlaced: [], wardsPlaced: [], visionScore: [], pinksBought: [] }
+    let playerChampion = { champLevel: [], championName: [], summonerName: []}
+
+    let aliado = []
+    let inimigo = []
     
     async function getMatchById(match_id) {
         let match_url = `https://americas.api.riotgames.com/lol/match/v5/matches/${match_id}?api_key=${process.env.RIOT_KEY_API}`
@@ -52,24 +56,35 @@ async function match_button(interaction) {
             let winOrNot = participant.win
         })
 
-
-
         const embed = new EmbedBuilder()
             .setTitle(`${gameType ? 'Ranked: Solo/Duo' : 'Modo arena'}`)
             .setDescription(`Duração total da partida: ${gameDuration} Minutos`)
             .setColor('Random')
             .setThumbnail('https://i.pinimg.com/originals/30/0e/58/300e58c8416a68dcfcf1761501348243.jpg')
             playerChampion.championName.forEach((championName, i) => {
-                const champLevel = playerChampion.champLevel[i];
-                const summonerName = playerChampion.summonerName[i];
+                const champLevel = playerChampion.champLevel[i]
+                const summonerName = playerChampion.summonerName[i]
 
-                const teamType = i > 4 ? 'Time Inimigo' : 'Time Aliado';
+                if(i > 4) {
+                    aliado.push(`**${championName.toString()}** \n **Nível:** ${champLevel} \n **Invocador:** ${summonerName} \n`)
+                }else {
+                    inimigo.push(`**${championName.toString()}** \n **Nível:** ${champLevel} \n **Invocador:** ${summonerName} \n`)
+                }
+            })
 
-                embed.addFields({
-                    name: `${teamType}`,
-                    value: `${championName.toString()} \n Nível: ${champLevel} \n Invocador: ${summonerName}`
-                });
-            });
+            embed.addFields({
+                name: 'Time Aliado \n',
+                value: aliado.join('\n'),
+                inline: true
+            })
+            embed.addFields({
+                name: 'Time Inimigo \n',
+                value: inimigo.join('\n'),
+                inline: true
+            })
+
+
+
             await interaction.reply({ embeds: [embed]})
     }
 
