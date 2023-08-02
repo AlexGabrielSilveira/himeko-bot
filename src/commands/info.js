@@ -9,7 +9,6 @@ let summoner = {
 
 let profile_url = `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/aLLLx?api_key=${process.env.RIOT_KEY_API}`
 
-
 axios.get(profile_url)
 .then(res => {
     summoner.name = res.data.name

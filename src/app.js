@@ -3,6 +3,7 @@ const { REST, Routes } = require('discord.js')
 const { Client, Collection, Events, GatewayIntentBits }  = require('discord.js')
 const fs = require('node:fs')
 const path = require('node:path')
+const { match_button } = require('./interactions/match_button')
 
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds]})
@@ -31,19 +32,24 @@ client.once(Events.ClientReady, c => {
 
 
 client.on(Events.InteractionCreate, async interaction => {
-	const command = interaction.client.commands.get(interaction.commandName)
-
-    await command.execute(interaction)
+	if(interaction.isCommand()) {
+		const command = interaction.client.commands.get(interaction.commandName)
+		
+		await command.execute(interaction)
+	}
+	if(interaction.isButton()) {
+		if(interaction.customId.startsWith('match_button')) {
+			match_button(interaction)
+		}
+	}
 })
 
 const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 
-// and deploy your commands!
+
 (async () => {
 	try {
 		console.log(`Comandos rodando ${commands.length} !!.`);
-
-		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
 			Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
 			{ body: commands },
@@ -51,7 +57,6 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {
-		// And of course, make sure you catch and log any errors!
 		console.error(error);
 	}
 })();
