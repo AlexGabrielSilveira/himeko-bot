@@ -8,6 +8,7 @@ async function match_button(interaction) {
     let playerKda = { kills: [], deaths: [], assists: [] }
     let playerWards = { controlWardsPlaced: [], wardsPlaced: [], visionScore: [], pinksBought: [] }
     let playerChampion = { champLevel: [], championName: [], summonerName: []}
+    let win
 
     let aliado = []
     let inimigo = []
@@ -21,39 +22,25 @@ async function match_button(interaction) {
         let gameType = match.gameType
         let gameDuration = Math.floor(match.gameDuration / 60)
         match.participants.map(participant => {
-            // KDA
-
-            let kills = participant.kills
-            let deaths = participant.deaths
-            let assists = participant.assists
-            
-            playerKda.kills.push(kills)
-            playerKda.deaths.push(deaths)
-            playerKda.assists.push(assists)
+            // KDA 
+            playerKda.kills.push(participant.kills)
+            playerKda.deaths.push(participant.deaths)
+            playerKda.assists.push(participant.assists)
 
             // vision score / WARDS
-            let controlWardsPlaced = participant.challenges.controlWardsPlaced
-            let wardsPlaced = participant.wardsPlaced
-            let visionScore = participant.visionScore
-            let pink =  participant.visionWardsBoughtInGame
-
-            playerWards.controlWardsPlaced.push(controlWardsPlaced)
-            playerWards.wardsPlaced.push(wardsPlaced)
-            playerWards.visionScore.push(visionScore)
-            playerWards.pinksBought.push(pink)
+            playerWards.controlWardsPlaced.push(participant.challenges.controlWardsPlaced)
+            playerWards.wardsPlaced.push(participant.wardsPlaced)
+            playerWards.visionScore.push(participant.visionScore)
+            playerWards.pinksBought.push(participant.visionWardsBoughtInGame)
 
             // champion
-            let champLevel = participant.champLevel
-            let championName = participant.championName
-            let summonerName = participant.summonerName
-
-            playerChampion.champLevel.push(champLevel)
-            playerChampion.championName.push(championName)
-            playerChampion.summonerName.push(summonerName)
+            playerChampion.champLevel.push(participant.champLevel)
+            playerChampion.championName.push(participant.championName)
+            playerChampion.summonerName.push(participant.summonerName)
 
 
             //win ?
-            let winOrNot = participant.win
+            win = participant.win
         })
 
         const embed = new EmbedBuilder()
@@ -73,7 +60,7 @@ async function match_button(interaction) {
             })
 
             embed.addFields({
-                name: 'Time Aliado \n',
+                name: `${win}` ? 'Time Vencedor' : 'perdeu',
                 value: aliado.join('\n'),
                 inline: true
             })

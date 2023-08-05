@@ -59,6 +59,6 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 	} catch (error) {
 		console.error(error);
 	}
-})();
+})()
 
 client.login(process.env.DISCORD_TOKEN)
