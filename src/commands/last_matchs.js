@@ -1,6 +1,6 @@
 const axios = require('axios')
 const  { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, } = require('discord.js')
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js')
 
 
 
@@ -35,7 +35,7 @@ module.exports = {
             const button = new ButtonBuilder()
                 .setCustomId('match_button:' + match_id)
                 .setLabel(`Partida #${i + 1}`)
-                .setStyle(ButtonStyle.Danger)
+                .setStyle(ButtonStyle.Primary)
             
             buttons.push(button)
         })
