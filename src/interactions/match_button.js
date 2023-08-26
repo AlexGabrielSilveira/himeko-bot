@@ -8,7 +8,6 @@ async function match_button(interaction) {
     let playerKda = { kills: [], deaths: [], assists: [] }
     let playerWards = { controlWardsPlaced: [], wardsPlaced: [], visionScore: [], pinksBought: [] }
     let playerChampion = { champLevel: [], championName: [], summonerName: []}
-    let win
 
     let aliado = []
     let inimigo = []
@@ -22,7 +21,7 @@ async function match_button(interaction) {
         let gameType = match.gameType
         let gameDuration = Math.floor(match.gameDuration / 60)
         match.participants.map(participant => {
-            // KDA 
+            // KDA  
             playerKda.kills.push(participant.kills)
             playerKda.deaths.push(participant.deaths)
             playerKda.assists.push(participant.assists)
@@ -60,12 +59,10 @@ async function match_button(interaction) {
             })
 
             embed.addFields({
-                name: `${win}` ? 'Time Vencedor' : 'perdeu',
                 value: aliado.join('\n'),
                 inline: true
             })
             embed.addFields({
-                name: 'Time Inimigo \n',
                 value: inimigo.join('\n'),
                 inline: true
             })

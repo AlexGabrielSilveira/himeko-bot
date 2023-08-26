@@ -2,8 +2,6 @@ const axios = require('axios')
 const  { SlashCommandBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, } = require('discord.js')
 const { EmbedBuilder } = require('discord.js')
 
-
-
 async function getHistoryBySummonerName(summoner) {
     let profile_url = `https://br1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summoner}?api_key=${process.env.RIOT_KEY_API}`
     let puuid = (await axios.get(profile_url)).data.puuid
@@ -14,7 +12,6 @@ async function getHistoryBySummonerName(summoner) {
     return last_matches
 
 }
-
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -31,7 +28,7 @@ module.exports = {
         let buttons = []
 
         match_history.forEach((match_id, i) => {
-            
+
             const button = new ButtonBuilder()
                 .setCustomId('match_button:' + match_id)
                 .setLabel(`Partida #${i + 1}`)
