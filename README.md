@@ -1,5 +1,2 @@
 # lol_bot
-um bot para discord que ira consumir a API da riot games e ira retornar partidas em tempo real de league of legends.
-
-comando /history
-<img src="/match_history.png">
+Caso queira testar o bot, pode adiciona-lo ao seu servidor do discord por este link: https://discord.com/api/oauth2/authorize?client_id=1112651213729706085&permissions=8&scope=bot
