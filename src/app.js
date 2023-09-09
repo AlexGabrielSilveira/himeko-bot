@@ -25,7 +25,6 @@ for(const file of commandFiles) {
     }   
 }
 
-// c = cliente, dei esse nome para n ficar igual ao de cima
 client.once(Events.ClientReady, c => {
     console.log(`FUNCIONANDO! LOGADO COMO ${c.user.tag}`)
 })
@@ -44,21 +43,19 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 })
 
-const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+const rest = new REST().setToken(process.env.DISCORD_TOKEN_DEV);
 
 
 (async () => {
 	try {
 		console.log(`Comandos rodando ${commands.length} !!.`);
 		const data = await rest.put(
-			Routes.applicationCommands(process.env.CLIENT_ID),
+			Routes.applicationCommands(process.env.CLIENT_ID_DEV),
 			{ body: commands },
 		);
-
-		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
 	} catch (error) {
 		console.error(error);
 	}
 })()
 
-client.login(process.env.DISCORD_TOKEN)
+client.login(process.env.DISCORD_TOKEN_DEV)

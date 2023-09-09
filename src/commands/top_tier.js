@@ -12,7 +12,6 @@ async execute(interaction) {
     const players = tierList.data.slice(0,9).map(player => {
         return player.summonerName
     })
-    console.log(players)
 
     const embed = new EmbedBuilder()
         .setTitle("Top 10 | BR1 ")

@@ -57,12 +57,14 @@ async function match_button(interaction) {
                     inimigo.push(`**${championName.toString()}** \n **Nível:** ${champLevel} \n **Invocador:** ${summonerName} \n`)
                 }
             })
-
+            
             embed.addFields({
+                name: "Time aliado",
                 value: aliado.join('\n'),
                 inline: true
             })
             embed.addFields({
+                name: "Time inimigo",
                 value: inimigo.join('\n'),
                 inline: true
             })
