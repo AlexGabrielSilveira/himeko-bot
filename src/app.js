@@ -43,14 +43,14 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 })
 
-const rest = new REST().setToken(process.env.DISCORD_TOKEN_DEV);
+const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 
 
 (async () => {
 	try {
 		console.log(`Comandos rodando ${commands.length} !!.`);
 		const data = await rest.put(
-			Routes.applicationCommands(process.env.CLIENT_ID_DEV),
+			Routes.applicationCommands(process.env.CLIENT_ID),
 			{ body: commands },
 		);
 	} catch (error) {
@@ -58,4 +58,4 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN_DEV);
 	}
 })()
 
-client.login(process.env.DISCORD_TOKEN_DEV)
+client.login(process.env.DISCORD_TOKEN)
