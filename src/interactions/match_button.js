@@ -2,7 +2,6 @@ const axios = require('axios')
 const { EmbedBuilder } = require('discord.js')
 
 
-
 async function match_button(interaction) {
 
     let playerKda = { kills: [], deaths: [], assists: [] }
@@ -46,7 +45,7 @@ async function match_button(interaction) {
             .setTitle(`${gameType ? 'Ranked: Solo/Duo' : 'Modo arena'}`)
             .setDescription(`Duração total da partida: ${gameDuration} Minutos`)
             .setColor('Random')
-            .setThumbnail('https://i.pinimg.com/originals/30/0e/58/300e58c8416a68dcfcf1761501348243.jpg')
+            .setThumbnail('https://th.bing.com/th/id/R.c81e94e9184ad3239f526f7a61342ad2?rik=MhpFHCC%2fybovpQ&pid=ImgRaw&r=0')
             playerChampion.championName.forEach((championName, i) => {
                 const champLevel = playerChampion.champLevel[i]
                 const summonerName = playerChampion.summonerName[i]
