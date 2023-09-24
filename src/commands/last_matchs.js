@@ -44,6 +44,6 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle('Escolha a partida 🔽')
 
-        await interaction.reply( {embeds: [embed], components: [row],})
+        await interaction.reply( {embeds: [embed], components: [row]})
     }
 }

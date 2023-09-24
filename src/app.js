@@ -4,6 +4,8 @@ const { Client, Collection, Events, GatewayIntentBits }  = require('discord.js')
 const fs = require('node:fs')
 const path = require('node:path')
 const { match_button } = require('./interactions/match_button')
+const { match_player_details } = require('./interactions/match_player_details')
+
 
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds]})
@@ -39,6 +41,11 @@ client.on(Events.InteractionCreate, async interaction => {
 	if(interaction.isButton()) {
 		if(interaction.customId.startsWith('match_button')) {
 			match_button(interaction)
+		}
+	}
+	if(interaction.isStringSelectMenu()) {
+		if(interaction.customId.startsWith('match_player_details')) {
+			match_player_details(interaction)
 		}
 	}
 })
