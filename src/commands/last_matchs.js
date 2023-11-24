@@ -8,7 +8,7 @@ async function getHistoryBySummonerName(summoner) {
 
     let matches =  `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=5&api_key=${process.env.RIOT_KEY_API}`
     let last_matches = (await axios.get(matches)).data
-
+    console.log(last_matches)
     return last_matches
 
 }
