@@ -6,8 +6,6 @@ const path = require('node:path')
 const { match_button } = require('./interactions/match_button')
 const { match_player_details } = require('./interactions/match_player_details')
 
-
-
 const client = new Client({ intents: [GatewayIntentBits.Guilds]})
 
 client.commands = new Collection()

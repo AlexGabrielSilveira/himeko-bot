@@ -1,29 +1,30 @@
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js')
+const { EmbedBuilder, SlashCommandBuilder, embedLength } = require('discord.js')
 const axios = require('axios')
+
 const commands = ["profile", "top", "history"]
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('mangas')
-        .setDescription('Exibe todos os mangas do Site!'),
+        .setName('scanlators')
+        .setDescription('Exibe todos os grupos do Site.'),
     async execute(interaction) {
         try {
-            let api = process.env.LOCALHOST + '/manga'
+            let api = process.env.LOCALHOST + '/scanlator'
             let res = await axios.get(api)
-            let data =  await res.data
+            let data = await res.data
 
             const embed = new EmbedBuilder()
             data.map(res => {
-                embed.setTitle('Mangas')
+                embed.setTitle('Scanlators')
                 embed.setThumbnail('https://files.catbox.moe/agf65p.png')
                 embed.setColor('#FFA500')
                 embed.addFields({
                     name: `${res.name}`,
-                    value: `**nota:** ${res.note} \n **tags:** ${res.tags} \n **descrição:** ${res.description}`
+                    value: `${res.url}`
                 })
                 
-            })
-            await interaction.reply({embeds: [embed]})
+            })     
+            await interaction.reply({embeds: [embed]})  
         }catch(err) {
             const embed = new EmbedBuilder()
                 .setTitle('#Erro#')
@@ -34,7 +35,7 @@ module.exports = {
                     value: `**Nosso servidor esta offline no momento, tente esses comandos:** \n ${commands}`
                 })
             await interaction.reply({embeds: [embed]})
-        }       
+        }
+
     }
-        
 }
