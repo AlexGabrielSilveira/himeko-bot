@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, EmbedBuilder, embedLength, SlashCommandBuilder } from "discord.js";
-import { getPlayerProfile, MasteryChampions } from "../services/riot-api";
 import { LOL_CDN } from "../config/config";
-
+import { getPlayerProfile } from "../services/riot-api";
+import { ProfileInfos } from "../interfaces/riot";
 
 export const data = new SlashCommandBuilder()
     .setName('profile')
@@ -52,7 +52,7 @@ export async function execute(interaction: ChatInputCommandInteraction) {
             value: "\n"
         },
         )
-        profile.championsMastery.map((champ: MasteryChampions) => {
+        profile.championsMastery.map((champ: ProfileInfos) => {
             embed
             .addFields({
                 name: `\n 🏆 ${champ.championName}`,
