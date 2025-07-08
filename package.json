@@ -1,12 +1,17 @@
 {
-  "scripts": {
-    "dev": "nodemon src/app",
-    "start": "node src/app"
-  },
+ "scripts": {
+  "dev": "tsx watch src/app.ts",
+  "build": "tsc",
+  "start": "node dist/bot.js"
+},
   "dependencies": {
     "axios": "^1.4.0",
     "discord.js": "^14.11.0",
-    "dotenv": "^16.3.1",
-    "nodemon": "^3.0.1"
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.10",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3"
   }
 }
